@@ -2,11 +2,11 @@ name = "myshop-admin"
 main = "src/index.ts"
 compatibility_date = "2024-01-01"
 
-# D1
+# D1 — ใส่ Database ID จริงจาก Dashboard: D1 → เลือกฐานข้อมูล → คัดลอก ID
 [[d1_databases]]
 binding = "DB"
 database_name = "myshop-d1"
-database_id = "<CREATE_VIA_DASHBOARD_AND_PASTE_ID>"
+database_id = "YOUR_D1_DATABASE_ID"
 
 # KV for login rate limit (create in dashboard, paste id; optional for dev)
 # [[kv_namespaces]]
