@@ -1,0 +1,5 @@
+# Copy to .dev.vars for local wrangler dev (do not commit .dev.vars)
+JWT_SECRET=your-dev-secret-at-least-32-chars
+IMAGES_API_TOKEN=your-cloudflare-images-api-token
+SEED_SECRET=one-time-secret-for-seed-api
+ALLOWED_ORIGINS=http://localhost:8787,http://localhost:4321

@@ -1,0 +1,27 @@
+name = "myshop-admin"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+# D1
+[[d1_databases]]
+binding = "DB"
+database_name = "myshop-d1"
+database_id = "<CREATE_VIA_DASHBOARD_AND_PASTE_ID>"
+
+# KV for login rate limit (create in dashboard, paste id; optional for dev)
+# [[kv_namespaces]]
+# binding = "RATE_LIMIT"
+# id = "<CREATE_VIA_DASHBOARD_AND_PASTE_ID>"
+
+[vars]
+ALLOWED_ORIGINS = "https://myshop-admin.YOUR_SUBDOMAIN.workers.dev,http://localhost:8787"
+IMAGES_ACCOUNT_ID = ""
+IMAGES_ACCOUNT_HASH = ""
+IMAGES_VARIANT_AVATAR = "avatar"
+IMAGES_VARIANT_COVER = "cover"
+
+# Admin UI: Vite build -> dist/. Worker runs first for /api and /public.
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+run_worker_first = true

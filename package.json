@@ -1,0 +1,22 @@
+{
+  "name": "myshop-monorepo",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "pnpm -r run build",
+    "dev:admin": "pnpm --filter admin run dev",
+    "dev:landing": "pnpm --filter landing run dev",
+    "deploy:admin": "pnpm --filter admin run deploy",
+    "deploy:landing": "pnpm --filter landing run deploy",
+    "test": "pnpm -r run test",
+    "db:migrate": "pnpm --filter admin run db:migrate",
+    "db:seed": "pnpm --filter admin run db:seed"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "pnpm@9.0.0"
+}
