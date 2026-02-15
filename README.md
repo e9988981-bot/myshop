@@ -55,7 +55,7 @@ Multi-shop landing + single Admin backend on Cloudflare (Pages + Worker + D1 + I
      - `IMAGES_ACCOUNT_ID`, `IMAGES_ACCOUNT_HASH`, `IMAGES_VARIANT_AVATAR`, `IMAGES_VARIANT_COVER`
    - **D1**: ผูก D1 database กับ binding ชื่อ `DB`
    - **KV** (ถ้าใช้): ผูก KV กับ binding ชื่อ `RATE_LIMIT`
-   - **Secrets**: ใส่ `JWT_SECRET`, `IMAGES_API_TOKEN` และ `SEED_SECRET` (ใช้สำหรับ seed ครั้งแรกเท่านั้น)
+   - **Secrets**: ใส่ **`JWT_SECRET`** (ต้องมี ถ้าไม่มีล็อกอินจะ 500), `IMAGES_API_TOKEN`, `SEED_SECRET` (ใช้สำหรับ seed / รีเซ็ตรหัสผ่าน)
 
 แก้ `apps/admin/wrangler.toml` ให้ใช้ **database_id** และ (ถ้าใช้ KV) **id** ของ KV ที่สร้างไว้
 
