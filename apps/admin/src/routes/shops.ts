@@ -164,10 +164,15 @@ app.put("/api/shops/:id", requireAuth, async (c) => {
 
 // Admin: list shops (basic)
 app.get("/api/shops", requireAuth, async (c) => {
-  const { results } = await c.env.DB.prepare(
-    "SELECT id, name_lo, name_en, updated_at FROM shops ORDER BY updated_at DESC"
-  ).all();
-  return c.json({ shops: results ?? [] });
+  try {
+    const { results } = await c.env.DB.prepare(
+      "SELECT id, name_lo, name_en, updated_at FROM shops ORDER BY updated_at DESC"
+    ).all();
+    return c.json({ shops: results ?? [] });
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    return c.json({ error: "Failed to load shops.", detail: msg }, 500);
+  }
 });
 
 // Admin: get direct upload URL for profile image

@@ -8,27 +8,37 @@ export function ShopList({
   locale,
   onNew,
   onEdit,
+  onUnauthorized,
 }: {
   locale: Locale;
   onNew: () => void;
   onEdit: (id: string) => void;
+  onUnauthorized?: () => void;
 }) {
   const [shops, setShops] = useState<ShopRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
+    setError("");
     fetch("/api/shops", { credentials: "include" })
-      .then((r) => r.json())
-      .then((data) => {
-        setShops(data.shops ?? []);
+      .then(async (r) => {
+        const data = await r.json().catch(() => ({}));
+        if (r.status === 401) {
+          onUnauthorized?.();
+          throw new Error("Unauthorized");
+        }
+        if (!r.ok) {
+          throw new Error((data as { error?: string }).error || t(locale, "error.load"));
+        }
+        setShops((data as { shops?: ShopRow[] }).shops ?? []);
       })
-      .catch(() => setError(t(locale, "error.load")))
+      .catch((e) => setError(e instanceof Error ? e.message : t(locale, "error.load")))
       .finally(() => setLoading(false));
   }, [locale]);
 
-  if (loading) return <p className="text-gray-500">Loading shops…</p>;
-  if (error) return <p className="text-red-600">{error}</p>;
+  if (loading) return <p className="text-slate-500">Loading shops…</p>;
+  if (error) return <p className="text-red-600 px-4">{error}</p>;
 
   return (
     <div className="bg-white rounded-lg shadow p-4">

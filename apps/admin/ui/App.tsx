@@ -90,6 +90,7 @@ export default function App() {
               setEditId(id);
               setView("edit");
             }}
+            onUnauthorized={() => setUser(null)}
           />
         )}
         {view === "create" && (
