@@ -38,17 +38,17 @@ export default function App() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
-        <span className="text-gray-500">Loading…</span>
+      <div className="min-h-screen flex items-center justify-center bg-slate-50">
+        <span className="text-slate-500">Loading…</span>
       </div>
     );
   }
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-gray-100 flex flex-col">
-        <header className="bg-white shadow flex justify-between items-center px-4 py-3">
-          <h1 className="text-xl font-semibold">{t(locale, "app.title")}</h1>
+      <div className="min-h-screen bg-slate-50 flex flex-col">
+        <header className="bg-white border-b border-slate-200 flex justify-between items-center px-6 py-4">
+          <h1 className="text-xl font-semibold text-slate-800">{t(locale, "app.title")}</h1>
           <LangToggle locale={locale} setLocale={setLocale} />
         </header>
         <Login locale={locale} onSuccess={checkAuth} />
@@ -57,25 +57,25 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col">
-      <header className="bg-white shadow flex justify-between items-center px-4 py-3 flex-wrap gap-2">
-        <h1 className="text-xl font-semibold">{t(locale, "app.title")}</h1>
+    <div className="min-h-screen bg-slate-50 flex flex-col">
+      <header className="bg-white border-b border-slate-200 flex justify-between items-center px-6 py-4 flex-wrap gap-3">
+        <h1 className="text-xl font-semibold text-slate-800">{t(locale, "app.title")}</h1>
         <div className="flex items-center gap-3">
           <LangToggle locale={locale} setLocale={setLocale} />
-          <span className="text-sm text-gray-600">{user.email}</span>
+          <span className="text-sm text-slate-600">{user.email}</span>
           <button
             type="button"
             onClick={async () => {
               await fetch("/api/auth/logout", { method: "POST", credentials: "include" });
               setUser(null);
             }}
-            className="text-sm text-red-600 hover:underline"
+            className="text-sm text-red-600 hover:text-red-700 hover:underline"
           >
             {t(locale, "auth.logout")}
           </button>
         </div>
       </header>
-      <main className="flex-1 p-4 max-w-4xl mx-auto w-full">
+      <main className="flex-1 p-6 max-w-4xl mx-auto w-full">
         {view === "list" && (
           <ShopList
             locale={locale}
@@ -121,18 +121,18 @@ function LangToggle({
   setLocale: (l: Locale) => void;
 }) {
   return (
-    <div className="flex rounded overflow-hidden border border-gray-300">
+    <div className="flex rounded-lg overflow-hidden border border-slate-300 bg-white">
       <button
         type="button"
         onClick={() => setLocale("lo")}
-        className={`px-3 py-1 text-sm ${locale === "lo" ? "bg-blue-600 text-white" : "bg-white text-gray-700"}`}
+        className={`px-4 py-2 text-sm font-medium transition-colors ${locale === "lo" ? "bg-blue-600 text-white" : "bg-white text-slate-600 hover:bg-slate-50"}`}
       >
         ລາວ
       </button>
       <button
         type="button"
         onClick={() => setLocale("en")}
-        className={`px-3 py-1 text-sm ${locale === "en" ? "bg-blue-600 text-white" : "bg-white text-gray-700"}`}
+        className={`px-4 py-2 text-sm font-medium transition-colors ${locale === "en" ? "bg-blue-600 text-white" : "bg-white text-slate-600 hover:bg-slate-50"}`}
       >
         EN
       </button>
