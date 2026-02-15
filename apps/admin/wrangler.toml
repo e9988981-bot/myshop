@@ -1,4 +1,4 @@
-name = "myshop-admin"
+name = "myshop"
 main = "src/index.ts"
 compatibility_date = "2024-01-01"
 
@@ -6,7 +6,7 @@ compatibility_date = "2024-01-01"
 [[d1_databases]]
 binding = "DB"
 database_name = "myshop-d1"
-database_id = "YOUR_D1_DATABASE_ID"
+database_id = "2833e031-f79a-4b08-9013-22e43d75a0ef"
 
 # KV for login rate limit (create in dashboard, paste id; optional for dev)
 # [[kv_namespaces]]
