@@ -51,7 +51,13 @@ export default function App() {
           <h1 className="text-xl font-semibold text-slate-800">{t(locale, "app.title")}</h1>
           <LangToggle locale={locale} setLocale={setLocale} />
         </header>
-        <Login locale={locale} onSuccess={checkAuth} />
+        <Login
+          locale={locale}
+          onSuccess={(user) => {
+            if (user) setUser(user);
+            else checkAuth();
+          }}
+        />
       </div>
     );
   }

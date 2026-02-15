@@ -7,7 +7,7 @@ export function Login({
   onSuccess,
 }: {
   locale: Locale;
-  onSuccess: () => void;
+  onSuccess: (user?: { id: string; email: string }) => void;
 }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,10 +27,15 @@ export function Login({
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
-        setError(data.error || (res.status === 429 ? t(locale, "auth.too_many") : t(locale, "auth.invalid")));
+        setError(data.error || data.detail || (res.status === 429 ? t(locale, "auth.too_many") : t(locale, "auth.invalid")));
         return;
       }
-      onSuccess();
+      // ใช้ user จาก response เลย ไม่ต้องเรียก /api/me (ถ้า /api/me 500 ก็ยังเข้าได้)
+      if (data.user && data.user.id && data.user.email) {
+        onSuccess(data.user);
+      } else {
+        onSuccess();
+      }
     } catch {
       setError("Network error");
     } finally {

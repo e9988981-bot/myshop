@@ -78,18 +78,23 @@ app.post("/api/auth/logout", (c) => {
 });
 
 app.get("/api/me", async (c) => {
-  if (!c.env.JWT_SECRET || c.env.JWT_SECRET.trim() === "") {
-    return c.json({ error: "Server misconfiguration: JWT_SECRET not set." }, 500);
-  }
-  const token = getCookieToken(c);
-  if (!token) {
+  try {
+    const secret = typeof c.env.JWT_SECRET === "string" ? c.env.JWT_SECRET : "";
+    if (!secret || secret.trim() === "") {
+      return c.json({ error: "Unauthorized" }, 401);
+    }
+    const token = getCookieToken(c);
+    if (!token) {
+      return c.json({ error: "Unauthorized" }, 401);
+    }
+    const payload = await verifyJwt(token, secret);
+    if (!payload) {
+      return c.json({ error: "Unauthorized" }, 401);
+    }
+    return c.json({ id: payload.sub, email: payload.email });
+  } catch (_err) {
     return c.json({ error: "Unauthorized" }, 401);
   }
-  const payload = await verifyJwt(token, c.env.JWT_SECRET);
-  if (!payload) {
-    return c.json({ error: "Unauthorized" }, 401);
-  }
-  return c.json({ id: payload.sub, email: payload.email });
 });
 
 export default app;
