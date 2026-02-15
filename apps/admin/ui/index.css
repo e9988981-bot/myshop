@@ -6,6 +6,7 @@ body {
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
+  background: #f1f5f9;
 }
 
 input, button, select, textarea {
@@ -14,4 +15,83 @@ input, button, select, textarea {
 
 input::placeholder, textarea::placeholder {
   color: #9ca3af;
+}
+
+/* Fallback: ใช้เมื่อ Tailwind ไม่โหลด ให้ฟอร์มยังดูใช้ได้ */
+#root input[type="email"],
+#root input[type="password"],
+#root input[type="text"],
+#root textarea {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 0.625rem 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  background: #fff;
+}
+#root input:focus,
+#root textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+#root button[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-weight: 500;
+  font-size: 1rem;
+  color: #fff;
+  background: #2563eb;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+#root button[type="submit"]:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+#root button[type="submit"]:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+#root form {
+  background: #fff;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+  border: 1px solid #e2e8f0;
+  padding: 2rem;
+  max-width: 28rem;
+  margin: 0 auto;
+}
+#root .space-y-5 > * + * { margin-top: 1.25rem; }
+#root header {
+  background: #fff;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+#root .rounded-lg.overflow-hidden.border {
+  border-radius: 0.5rem;
+  border: 1px solid #cbd5e1;
+  overflow: hidden;
+  display: inline-flex;
+}
+#root .rounded-lg.overflow-hidden.border button {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  border: none;
+  cursor: pointer;
+  background: #fff;
+  color: #475569;
+}
+#root .rounded-lg.overflow-hidden.border button.bg-blue-600 {
+  background: #2563eb;
+  color: #fff;
 }
